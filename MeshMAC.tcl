@@ -23,19 +23,22 @@ set val(traffic)	cbr ;
 
 set appTime1            0;
 set appTime2            8;
-set appTime3            0;
-set appTime4            8;
-set appTime5            1;
-set appTime6            9;
+set appTime3            1;
+set appTime4            9;
+set appTime5            0;
+set appTime6            8;
 set appTime7            1;
 set appTime8            9;
 set appTime9            0;
 set appTime10            8;
 set appTime11            1;
 set appTime12            9;
-
-set appTime17		 1
-set appTime18            9;
+set appTime13            0;
+set appTime14            8;
+set appTime15            1;
+set appTime16            9;
+set appTime17            0;
+set appTime18            8;
 set appTime19            1;
 set appTime20            9;
 set appTime21            0;
@@ -46,34 +49,30 @@ set appTime25            0;
 set appTime26            8;
 set appTime27            1;
 set appTime28            9;
-set appTime29            1;
-set appTime30            9;
-set appTime31            0;
-set appTime32            8;
+set appTime29            0;
+set appTime30            8;
+set appTime31            1;
+set appTime32            9;
 set appTime33            0;
 set appTime34            8;
-set appTime35            0;
-set appTime36            8;
-set appTime37            1;
-set appTime38            9;
+set appTime35            1;
+set appTime36            9;
+set appTime37            0;
+set appTime38            8;
 set appTime39            1;
 set appTime40            9;
-set appTime41            1;
-set appTime42            9;
-set appTime43            0;
-set appTime44            8;
-set appTime45            1;
-set appTime46            9;
-set appTime47            0;
-set appTime48            8;
+set appTime41            0;
+set appTime42            8;
+set appTime43            1;
+set appTime44            9;
+set appTime45            0;
+set appTime46            8;
+set appTime47            1;
+set appTime48            9;
 set appTime49            0;
 set appTime50            8;
 set appTime51            1;
 set appTime52            9;
-set appTime53            0;
-set appTime54            8;
-set appTime55            1;
-set appTime56            9;
 
 
 set stopTime            300	;# in seconds
@@ -165,14 +164,13 @@ $ns_ at 0.310 	"$node_(5) sscs startDevice  1 8 2 "		;
 $ns_ at 0.372 	"$node_(6) sscs startDevice  1 8 2 "		;
 $ns_ at 0.434 	"$node_(7) sscs startDevice  1 8 2 "		;
 $ns_ at 0.496 	"$node_(8) sscs startDevice  1 8 2 "		;
-$ns_ at 5.6 	"$node_(9) sscs startDevice  1 8 2 "		;
+$ns_ at 0.6 	"$node_(9) sscs startDevice  1 8 2 "		;
 $ns_ at 0.6 	"$node_(10) sscs startDevice  0 "		;
 $ns_ at 0.6 	"$node_(11) sscs startDevice  0 "		;
 $ns_ at 0.6 	"$node_(12) sscs startDevice  0 "		;
 $ns_ at 0.6 	"$node_(13) sscs startDevice  0 "		;
 $ns_ at 0.6 	"$node_(14) sscs startDevice  0 "		;
 $ns_ at 0.6 	"$node_(15) sscs startDevice  0 "		;
-
 
 
 
@@ -183,14 +181,14 @@ if { ("$val(traffic)" == "cbr") } {
 	#Communication1
 	set udp1 [new Agent/UDP]
 	set sink1 [new Agent/Null]
-	$ns_ attach-agent $node_(7) $udp1
-	$ns_ attach-agent $node_(5) $sink1
+	$ns_ attach-agent $node_(1) $udp1
+	$ns_ attach-agent $node_(0) $sink1
 	$ns_ connect $udp1 $sink1
 	set cbr1 [new Application/Traffic/CBR]
 	$cbr1 attach-agent $udp1
 	$cbr1 set packetSize_ 100
 	$cbr1 set rate_ 25000
-        $cbr1 set interval_ 10 
+	$cbr1 set interval_ 10 
 	$cbr1 set random_ 0
 	$ns_ at 0 "$cbr1 start "
 	$ns_ at 8 "$cbr1 stop "
@@ -199,12 +197,12 @@ if { ("$val(traffic)" == "cbr") } {
 	#Communication2
 	set udp2 [new Agent/UDP]
 	set sink2 [new Agent/Null]
-	$ns_ attach-agent $node_(5) $udp2
-	$ns_ attach-agent $node_(0) $sink2
+	$ns_ attach-agent $node_(0) $udp2
+	$ns_ attach-agent $node_(1) $sink2
 	$ns_ connect $udp2 $sink2
 	set cbr2 [new Application/Traffic/CBR]
 	$cbr2 attach-agent $udp2
-        $cbr2 set packetSize_ 100
+	$cbr2 set packetSize_ 100
 	$cbr2 set rate_ 25000
 	$cbr2 set interval_ 10 
 	$cbr2 set random_ 0
@@ -215,45 +213,45 @@ if { ("$val(traffic)" == "cbr") } {
 	#Communication3
 	set udp3 [new Agent/UDP]
 	set sink3 [new Agent/Null]
-	$ns_ attach-agent $node_(0) $udp3
-	$ns_ attach-agent $node_(5) $sink3
+	$ns_ attach-agent $node_(2) $udp3
+	$ns_ attach-agent $node_(0) $sink3
 	$ns_ connect $udp3 $sink3
 	set cbr3 [new Application/Traffic/CBR]
 	$cbr3 attach-agent $udp3
 	$cbr3 set packetSize_ 100
-	$cbr3 set rate_ 25000	
+	$cbr3 set rate_ 25000
 	$cbr3 set interval_ 10 
 	$cbr3 set random_ 0
-	$ns_ at 1 "$cbr3 start "
-	$ns_ at 9 "$cbr3 stop "
+	$ns_ at 0 "$cbr3 start "
+	$ns_ at 8 "$cbr3 stop "
 
 
 	#Communication4
 	set udp4 [new Agent/UDP]
 	set sink4 [new Agent/Null]
-	$ns_ attach-agent $node_(5) $udp4
-	$ns_ attach-agent $node_(7) $sink4
+	$ns_ attach-agent $node_(0) $udp4
+	$ns_ attach-agent $node_(2) $sink4
 	$ns_ connect $udp4 $sink4
 	set cbr4 [new Application/Traffic/CBR]
 	$cbr4 attach-agent $udp4
 	$cbr4 set packetSize_ 100
-	$cbr4 set rate_ 25000	
+	$cbr4 set rate_ 25000
 	$cbr4 set interval_ 10 
 	$cbr4 set random_ 0
-	$ns_ at 1 "$cbr4 start "
-	$ns_ at 9 "$cbr4 stop "
+	$ns_ at 0 "$cbr4 start "
+	$ns_ at 8 "$cbr4 stop "
 
 
 	#Communication5
 	set udp5 [new Agent/UDP]
 	set sink5 [new Agent/Null]
-	$ns_ attach-agent $node_(8) $udp5
-	$ns_ attach-agent $node_(7) $sink5
+	$ns_ attach-agent $node_(3) $udp5
+	$ns_ attach-agent $node_(0) $sink5
 	$ns_ connect $udp5 $sink5
 	set cbr5 [new Application/Traffic/CBR]
 	$cbr5 attach-agent $udp5
 	$cbr5 set packetSize_ 100
-	$cbr5 set rate_ 25000	
+	$cbr5 set rate_ 25000
 	$cbr5 set interval_ 10 
 	$cbr5 set random_ 0
 	$ns_ at 0 "$cbr5 start "
@@ -263,8 +261,8 @@ if { ("$val(traffic)" == "cbr") } {
 	#Communication6
 	set udp6 [new Agent/UDP]
 	set sink6 [new Agent/Null]
-	$ns_ attach-agent $node_(7) $udp6
-	$ns_ attach-agent $node_(5) $sink6
+	$ns_ attach-agent $node_(0) $udp6
+	$ns_ attach-agent $node_(3) $sink6
 	$ns_ connect $udp6 $sink6
 	set cbr6 [new Application/Traffic/CBR]
 	$cbr6 attach-agent $udp6
@@ -272,23 +270,47 @@ if { ("$val(traffic)" == "cbr") } {
 	$cbr6 set rate_ 25000
 	$cbr6 set interval_ 10 
 	$cbr6 set random_ 0
-	$ns_ at 1 "$cbr6 start "
-	$ns_ at 9 "$cbr6 stop "
+	$ns_ at 0 "$cbr6 start "
+	$ns_ at 8 "$cbr6 stop "
 
 
 	#Communication7
-	
+	set udp7 [new Agent/UDP]
+	set sink7 [new Agent/Null]
+	$ns_ attach-agent $node_(4) $udp7
+	$ns_ attach-agent $node_(0) $sink7
+	$ns_ connect $udp7 $sink7
+	set cbr7 [new Application/Traffic/CBR]
+	$cbr7 attach-agent $udp7
+	$cbr7 set packetSize_ 100
+	$cbr7 set rate_ 25000
+	$cbr7 set interval_ 10 
+	$cbr7 set random_ 0
+	$ns_ at 0 "$cbr7 start "
+	$ns_ at 8 "$cbr7 stop "
 
 
 	#Communication8
-	
+	set udp8 [new Agent/UDP]
+	set sink8 [new Agent/Null]
+	$ns_ attach-agent $node_(0) $udp8
+	$ns_ attach-agent $node_(4) $sink8
+	$ns_ connect $udp8 $sink8
+	set cbr8 [new Application/Traffic/CBR]
+	$cbr8 attach-agent $udp8
+	$cbr8 set packetSize_ 100
+	$cbr8 set rate_ 25000
+	$cbr8 set interval_ 10 
+	$cbr8 set random_ 0
+	$ns_ at 0 "$cbr8 start "
+	$ns_ at 8 "$cbr8 stop "
 
 
 	#Communication9
 	set udp9 [new Agent/UDP]
 	set sink9 [new Agent/Null]
-	$ns_ attach-agent $node_(5) $udp9
-	$ns_ attach-agent $node_(7) $sink9
+	$ns_ attach-agent $node_(4) $udp9
+	$ns_ attach-agent $node_(9) $sink9
 	$ns_ connect $udp9 $sink9
 	set cbr9 [new Application/Traffic/CBR]
 	$cbr9 attach-agent $udp9
@@ -296,15 +318,15 @@ if { ("$val(traffic)" == "cbr") } {
 	$cbr9 set rate_ 25000
 	$cbr9 set interval_ 10 
 	$cbr9 set random_ 0
-	$ns_ at 1 "$cbr9 start "
-	$ns_ at 9 "$cbr9 stop "
+	$ns_ at 0 "$cbr9 start "
+	$ns_ at 8 "$cbr9 stop "
 
 
 	#Communication10
 	set udp10 [new Agent/UDP]
 	set sink10 [new Agent/Null]
-	$ns_ attach-agent $node_(7) $udp10
-	$ns_ attach-agent $node_(8) $sink10
+	$ns_ attach-agent $node_(9) $udp10
+	$ns_ attach-agent $node_(4) $sink10
 	$ns_ connect $udp10 $sink10
 	set cbr10 [new Application/Traffic/CBR]
 	$cbr10 attach-agent $udp10
@@ -312,31 +334,31 @@ if { ("$val(traffic)" == "cbr") } {
 	$cbr10 set rate_ 25000
 	$cbr10 set interval_ 10 
 	$cbr10 set random_ 0
-	$ns_ at 1 "$cbr10 start "
-	$ns_ at 9 "$cbr10 stop "
+	$ns_ at 0 "$cbr10 start "
+	$ns_ at 8 "$cbr10 stop "
 
 
 	#Communication11
-	
 	set udp11 [new Agent/UDP]
 	set sink11 [new Agent/Null]
-	$ns_ attach-agent $node_(8) $udp11
-	$ns_ attach-agent $node_(7) $sink11
+	$ns_ attach-agent $node_(5) $udp11
+	$ns_ attach-agent $node_(0) $sink11
 	$ns_ connect $udp11 $sink11
 	set cbr11 [new Application/Traffic/CBR]
 	$cbr11 attach-agent $udp11
 	$cbr11 set packetSize_ 100
-	$cbr11 set rate_ 25000	
+	$cbr11 set rate_ 25000
 	$cbr11 set interval_ 10 
 	$cbr11 set random_ 0
 	$ns_ at 0 "$cbr11 start "
 	$ns_ at 8 "$cbr11 stop "
 
+
 	#Communication12
 	set udp12 [new Agent/UDP]
 	set sink12 [new Agent/Null]
-	$ns_ attach-agent $node_(7) $udp12
-	$ns_ attach-agent $node_(8) $sink12
+	$ns_ attach-agent $node_(0) $udp12
+	$ns_ attach-agent $node_(5) $sink12
 	$ns_ connect $udp12 $sink12
 	set cbr12 [new Application/Traffic/CBR]
 	$cbr12 attach-agent $udp12
@@ -344,14 +366,15 @@ if { ("$val(traffic)" == "cbr") } {
 	$cbr12 set rate_ 25000
 	$cbr12 set interval_ 10 
 	$cbr12 set random_ 0
-	$ns_ at 1 "$cbr12 start "
-	$ns_ at 9 "$cbr12 stop "
+	$ns_ at 0 "$cbr12 start "
+	$ns_ at 8 "$cbr12 stop "
+
 
 	#Communication13
 	set udp13 [new Agent/UDP]
 	set sink13 [new Agent/Null]
-	$ns_ attach-agent $node_(6) $udp13
-	$ns_ attach-agent $node_(5) $sink13
+	$ns_ attach-agent $node_(5) $udp13
+	$ns_ attach-agent $node_(6) $sink13
 	$ns_ connect $udp13 $sink13
 	set cbr13 [new Application/Traffic/CBR]
 	$cbr13 attach-agent $udp13
@@ -375,14 +398,15 @@ if { ("$val(traffic)" == "cbr") } {
 	$cbr14 set rate_ 25000
 	$cbr14 set interval_ 10 
 	$cbr14 set random_ 0
-	$ns_ at 1 "$cbr14 start "
-	$ns_ at 9 "$cbr14 stop "
+	$ns_ at 0 "$cbr14 start "
+	$ns_ at 8 "$cbr14 stop "
+
 
 	#Communication15
 	set udp15 [new Agent/UDP]
 	set sink15 [new Agent/Null]
 	$ns_ attach-agent $node_(5) $udp15
-	$ns_ attach-agent $node_(6) $sink15
+	$ns_ attach-agent $node_(7) $sink15
 	$ns_ connect $udp15 $sink15
 	set cbr15 [new Application/Traffic/CBR]
 	$cbr15 attach-agent $udp15
@@ -390,15 +414,15 @@ if { ("$val(traffic)" == "cbr") } {
 	$cbr15 set rate_ 25000
 	$cbr15 set interval_ 10 
 	$cbr15 set random_ 0
-	$ns_ at 1 "$cbr15 start "
-	$ns_ at 9 "$cbr15 stop "
+	$ns_ at 0 "$cbr15 start "
+	$ns_ at 8 "$cbr15 stop "
 
 
 	#Communication16
 	set udp16 [new Agent/UDP]
 	set sink16 [new Agent/Null]
-	$ns_ attach-agent $node_(5) $udp16
-	$ns_ attach-agent $node_(6) $sink16
+	$ns_ attach-agent $node_(7) $udp16
+	$ns_ attach-agent $node_(5) $sink16
 	$ns_ connect $udp16 $sink16
 	set cbr16 [new Application/Traffic/CBR]
 	$cbr16 attach-agent $udp16
@@ -413,8 +437,8 @@ if { ("$val(traffic)" == "cbr") } {
 	#Communication17
 	set udp17 [new Agent/UDP]
 	set sink17 [new Agent/Null]
-	$ns_ attach-agent $node_(9) $udp17
-	$ns_ attach-agent $node_(4) $sink17
+	$ns_ attach-agent $node_(6) $udp17
+	$ns_ attach-agent $node_(5) $sink17
 	$ns_ connect $udp17 $sink17
 	set cbr17 [new Application/Traffic/CBR]
 	$cbr17 attach-agent $udp17
@@ -429,8 +453,8 @@ if { ("$val(traffic)" == "cbr") } {
 	#Communication18
 	set udp18 [new Agent/UDP]
 	set sink18 [new Agent/Null]
-	$ns_ attach-agent $node_(4) $udp18
-	$ns_ attach-agent $node_(0) $sink18
+	$ns_ attach-agent $node_(5) $udp18
+	$ns_ attach-agent $node_(6) $sink18
 	$ns_ connect $udp18 $sink18
 	set cbr18 [new Application/Traffic/CBR]
 	$cbr18 attach-agent $udp18
@@ -445,8 +469,8 @@ if { ("$val(traffic)" == "cbr") } {
 	#Communication19
 	set udp19 [new Agent/UDP]
 	set sink19 [new Agent/Null]
-	$ns_ attach-agent $node_(0) $udp19
-	$ns_ attach-agent $node_(4) $sink19
+	$ns_ attach-agent $node_(7) $udp19
+	$ns_ attach-agent $node_(5) $sink19
 	$ns_ connect $udp19 $sink19
 	set cbr19 [new Application/Traffic/CBR]
 	$cbr19 attach-agent $udp19
@@ -454,15 +478,15 @@ if { ("$val(traffic)" == "cbr") } {
 	$cbr19 set rate_ 25000
 	$cbr19 set interval_ 10 
 	$cbr19 set random_ 0
-	$ns_ at 1 "$cbr19 start "
-	$ns_ at 9 "$cbr19 stop "
+	$ns_ at 0 "$cbr19 start "
+	$ns_ at 8 "$cbr19 stop "
 
 
 	#Communication20
 	set udp20 [new Agent/UDP]
 	set sink20 [new Agent/Null]
-	$ns_ attach-agent $node_(4) $udp20
-	$ns_ attach-agent $node_(9) $sink20
+	$ns_ attach-agent $node_(5) $udp20
+	$ns_ attach-agent $node_(7) $sink20
 	$ns_ connect $udp20 $sink20
 	set cbr20 [new Application/Traffic/CBR]
 	$cbr20 attach-agent $udp20
@@ -470,14 +494,15 @@ if { ("$val(traffic)" == "cbr") } {
 	$cbr20 set rate_ 25000
 	$cbr20 set interval_ 10 
 	$cbr20 set random_ 0
-	$ns_ at 1 "$cbr20 start "
-	$ns_ at 9 "$cbr20 stop "
+	$ns_ at 0 "$cbr20 start "
+	$ns_ at 8 "$cbr20 stop "
+
 
 	#Communication21
 	set udp21 [new Agent/UDP]
 	set sink21 [new Agent/Null]
-	$ns_ attach-agent $node_(9) $udp21
-	$ns_ attach-agent $node_(4) $sink21
+	$ns_ attach-agent $node_(7) $udp21
+	$ns_ attach-agent $node_(8) $sink21
 	$ns_ connect $udp21 $sink21
 	set cbr21 [new Application/Traffic/CBR]
 	$cbr21 attach-agent $udp21
@@ -485,15 +510,15 @@ if { ("$val(traffic)" == "cbr") } {
 	$cbr21 set rate_ 25000
 	$cbr21 set interval_ 10 
 	$cbr21 set random_ 0
-	$ns_ at 1 "$cbr21 start "
-	$ns_ at 9 "$cbr21 stop "
+	$ns_ at 0 "$cbr21 start "
+	$ns_ at 8 "$cbr21 stop "
 
 
 	#Communication22
 	set udp22 [new Agent/UDP]
 	set sink22 [new Agent/Null]
-	$ns_ attach-agent $node_(4) $udp22
-	$ns_ attach-agent $node_(9) $sink22
+	$ns_ attach-agent $node_(8) $udp22
+	$ns_ attach-agent $node_(7) $sink22
 	$ns_ connect $udp22 $sink22
 	set cbr22 [new Application/Traffic/CBR]
 	$cbr22 attach-agent $udp22
@@ -508,8 +533,8 @@ if { ("$val(traffic)" == "cbr") } {
 	#Communication23
 	set udp23 [new Agent/UDP]
 	set sink23 [new Agent/Null]
-	$ns_ attach-agent $node_(3) $udp23
-	$ns_ attach-agent $node_(0) $sink23
+	$ns_ attach-agent $node_(8) $udp23
+	$ns_ attach-agent $node_(7) $sink23
 	$ns_ connect $udp23 $sink23
 	set cbr23 [new Application/Traffic/CBR]
 	$cbr23 attach-agent $udp23
@@ -517,15 +542,15 @@ if { ("$val(traffic)" == "cbr") } {
 	$cbr23 set rate_ 25000
 	$cbr23 set interval_ 10 
 	$cbr23 set random_ 0
-	$ns_ at 1 "$cbr23 start "
-	$ns_ at 9 "$cbr23 stop "
+	$ns_ at 0 "$cbr23 start "
+	$ns_ at 8 "$cbr23 stop "
 
 
 	#Communication24
 	set udp24 [new Agent/UDP]
 	set sink24 [new Agent/Null]
-	$ns_ attach-agent $node_(0) $udp24
-	$ns_ attach-agent $node_(3) $sink24
+	$ns_ attach-agent $node_(7) $udp24
+	$ns_ attach-agent $node_(8) $sink24
 	$ns_ connect $udp24 $sink24
 	set cbr24 [new Application/Traffic/CBR]
 	$cbr24 attach-agent $udp24
@@ -540,8 +565,8 @@ if { ("$val(traffic)" == "cbr") } {
 	#Communication25
 	set udp25 [new Agent/UDP]
 	set sink25 [new Agent/Null]
-	$ns_ attach-agent $node_(2) $udp25
-	$ns_ attach-agent $node_(0) $sink25
+	$ns_ attach-agent $node_(9) $udp25
+	$ns_ attach-agent $node_(4) $sink25
 	$ns_ connect $udp25 $sink25
 	set cbr25 [new Application/Traffic/CBR]
 	$cbr25 attach-agent $udp25
@@ -556,8 +581,8 @@ if { ("$val(traffic)" == "cbr") } {
 	#Communication26
 	set udp26 [new Agent/UDP]
 	set sink26 [new Agent/Null]
-	$ns_ attach-agent $node_(0) $udp26
-	$ns_ attach-agent $node_(2) $sink26
+	$ns_ attach-agent $node_(4) $udp26
+	$ns_ attach-agent $node_(9) $sink26
 	$ns_ connect $udp26 $sink26
 	set cbr26 [new Application/Traffic/CBR]
 	$cbr26 attach-agent $udp26
@@ -565,44 +590,303 @@ if { ("$val(traffic)" == "cbr") } {
 	$cbr26 set rate_ 25000
 	$cbr26 set interval_ 10 
 	$cbr26 set random_ 0
-	$ns_ at 1 "$cbr26 start "
-	$ns_ at 9 "$cbr26 stop "
+	$ns_ at 0 "$cbr26 start "
+	$ns_ at 8 "$cbr26 stop "
 
 
-	#Communication27
-	set udp27 [new Agent/UDP]
-	set sink27 [new Agent/Null]
-	$ns_ attach-agent $node_(1) $udp27
-	$ns_ attach-agent $node_(0) $sink27
-	$ns_ connect $udp27 $sink27
-	set cbr27 [new Application/Traffic/CBR]
-	$cbr27 attach-agent $udp27
-	$cbr27 set packetSize_ 100
-	$cbr27 set rate_ 25000
-	$cbr27 set interval_ 10 
-	$cbr27 set random_ 0
-	$ns_ at 0 "$cbr27 start "
-	$ns_ at 8 "$cbr27 stop "
 
 
-	#Communication28
-	set udp28 [new Agent/UDP]
-	set sink28 [new Agent/Null]
-	$ns_ attach-agent $node_(0) $udp28
-	$ns_ attach-agent $node_(1) $sink28
-	$ns_ connect $udp28 $sink28
-	set cbr28 [new Application/Traffic/CBR]
-	$cbr28 attach-agent $udp28
-	$cbr28 set packetSize_ 100
-	$cbr28 set rate_ 25000
-	$cbr28 set interval_ 10 
-	$cbr28 set random_ 0
-	$ns_ at 1 "$cbr28 start "
-	$ns_ at 9 "$cbr28 stop "
+
+
+
+
+
+
+
+ #regular traffic
+        set udp29 [new Agent/UDP]
+	set sink29 [new Agent/Null]
+	$ns_ attach-agent $node_(12) $udp29
+	$ns_ attach-agent $node_(1) $sink29
+	$ns_ connect $udp29 $sink29
+	set cbr29 [new Application/Traffic/CBR]
+	$cbr29 attach-agent $udp29
+	$cbr29 set packetSize_ 100
+	$cbr29 set rate_ 25000
+	$cbr29 set interval_ 10 
+	$cbr29 set random_ 0
+	$ns_ at 15 "$cbr29 start "
+	$ns_ at 290 "$cbr29 stop "
+
+
+
+	set udp30 [new Agent/UDP]
+	set sink30 [new Agent/Null]
+	$ns_ attach-agent $node_(1) $udp30
+	$ns_ attach-agent $node_(0) $sink30
+	$ns_ connect $udp30 $sink30
+	set cbr30 [new Application/Traffic/CBR]
+	$cbr30 attach-agent $udp30
+	$cbr30 set packetSize_ 100
+	$cbr30 set rate_ 25000
+	$cbr30 set interval_ 10 
+	$cbr30 set random_ 0
+	$ns_ at 16 "$cbr30 start "
+	$ns_ at 290 "$cbr30 stop "
+
+
+	
+	set udp31 [new Agent/UDP]
+	set sink31 [new Agent/Null]
+	$ns_ attach-agent $node_(11) $udp31
+	$ns_ attach-agent $node_(1) $sink31
+	$ns_ connect $udp31 $sink31
+	set cbr31 [new Application/Traffic/CBR]
+	$cbr31 attach-agent $udp31
+	$cbr31 set packetSize_ 100
+	$cbr31 set rate_ 25000
+	$cbr31 set interval_ 10 
+	$cbr31 set random_ 0
+	$ns_ at 15 "$cbr31 start "
+	$ns_ at 290 "$cbr31 stop "
+
+
+
+	set udp32 [new Agent/UDP]
+	set sink32 [new Agent/Null]
+	$ns_ attach-agent $node_(1) $udp32
+	$ns_ attach-agent $node_(0) $sink32
+	$ns_ connect $udp32 $sink32
+	set cbr32 [new Application/Traffic/CBR]
+	$cbr32 attach-agent $udp32
+	$cbr32 set packetSize_ 100
+	$cbr32 set rate_ 25000
+	$cbr32 set interval_ 10 
+	$cbr32 set random_ 0
+	$ns_ at 16 "$cbr32 start "
+	$ns_ at 290 "$cbr32 stop "
+
+
+	set udp33 [new Agent/UDP]
+	set sink33 [new Agent/Null]
+	$ns_ attach-agent $node_(10) $udp33
+	$ns_ attach-agent $node_(2) $sink33
+	$ns_ connect $udp33 $sink33
+	set cbr33 [new Application/Traffic/CBR]
+	$cbr33 attach-agent $udp33
+	$cbr33 set packetSize_ 100
+	$cbr33 set rate_ 25000
+	$cbr33 set interval_ 10 
+	$cbr33 set random_ 0
+	$ns_ at 15 "$cbr33 start "
+	$ns_ at 290 "$cbr33 stop "
+
+
+
+	set udp34 [new Agent/UDP]
+	set sink34 [new Agent/Null]
+	$ns_ attach-agent $node_(2) $udp34
+	$ns_ attach-agent $node_(0) $sink34
+	$ns_ connect $udp34 $sink34
+	set cbr34 [new Application/Traffic/CBR]
+	$cbr34 attach-agent $udp34
+	$cbr34 set packetSize_ 100
+	$cbr34 set rate_ 25000
+	$cbr34 set interval_ 10 
+	$cbr34 set random_ 0
+	$ns_ at 16 "$cbr34 start "
+	$ns_ at 290 "$cbr34 stop "
+
+
+
+
+
+	set udp35 [new Agent/UDP]
+	set sink35 [new Agent/Null]
+	$ns_ attach-agent $node_(13) $udp35
+	$ns_ attach-agent $node_(7) $sink35
+	$ns_ connect $udp35 $sink35
+	set cbr35 [new Application/Traffic/CBR]
+	$cbr35 attach-agent $udp35
+	$cbr35 set packetSize_ 100
+	$cbr35 set rate_ 25000
+	$cbr35 set interval_ 10 
+	$cbr35 set random_ 0
+	$ns_ at 15 "$cbr35 start "
+	$ns_ at 290 "$cbr35 stop "
+
+
+
+	set udp36 [new Agent/UDP]
+	set sink36 [new Agent/Null]
+	$ns_ attach-agent $node_(7) $udp36
+	$ns_ attach-agent $node_(5) $sink36
+	$ns_ connect $udp36 $sink36
+	set cbr36 [new Application/Traffic/CBR]
+	$cbr36 attach-agent $udp36
+	$cbr36 set packetSize_ 100
+	$cbr36 set rate_ 25000
+	$cbr36 set interval_ 10 
+	$cbr36 set random_ 0
+	$ns_ at 16 "$cbr36 start "
+	$ns_ at 290 "$cbr36 stop "
+
+
+	
+	set udp37 [new Agent/UDP]
+	set sink37 [new Agent/Null]
+	$ns_ attach-agent $node_(5) $udp37
+	$ns_ attach-agent $node_(0) $sink37
+	$ns_ connect $udp37 $sink37
+	set cbr37 [new Application/Traffic/CBR]
+	$cbr37 attach-agent $udp37
+	$cbr37 set packetSize_ 100
+	$cbr37 set rate_ 25000
+	$cbr37 set interval_ 10 
+	$cbr37 set random_ 0
+	$ns_ at 17 "$cbr37 start "
+	$ns_ at 290 "$cbr37 stop "
 
 	
 
+
+
+
+
+
+
+
+
+
+	set udp38 [new Agent/UDP]
+	set sink38 [new Agent/Null]
+	$ns_ attach-agent $node_(14) $udp38
+	$ns_ attach-agent $node_(7) $sink38
+	$ns_ connect $udp38 $sink38
+	set cbr38 [new Application/Traffic/CBR]
+	$cbr38 attach-agent $udp38
+	$cbr38 set packetSize_ 100
+	$cbr38 set rate_ 25000
+	$cbr38 set interval_ 5 
+	$cbr38 set random_ 0
+	$ns_ at 15 "$cbr38 start "
+	$ns_ at 290 "$cbr38 stop "
+
+
+
+	set udp39 [new Agent/UDP]
+	set sink39 [new Agent/Null]
+	$ns_ attach-agent $node_(7) $udp39
+	$ns_ attach-agent $node_(5) $sink39
+	$ns_ connect $udp39 $sink39
+	set cbr39 [new Application/Traffic/CBR]
+	$cbr39 attach-agent $udp39
+	$cbr39 set packetSize_ 100
+	$cbr39 set rate_ 25000
+	$cbr39 set interval_ 5 
+	$cbr39 set random_ 0
+	$ns_ at 16 "$cbr39 start "
+	$ns_ at 290 "$cbr39 stop "
+
+
 	
+	set udp40 [new Agent/UDP]
+	set sink40 [new Agent/Null]
+	$ns_ attach-agent $node_(5) $udp40
+	$ns_ attach-agent $node_(0) $sink40
+	$ns_ connect $udp40 $sink40
+	set cbr40 [new Application/Traffic/CBR]
+	$cbr40 attach-agent $udp40
+	$cbr40 set packetSize_ 100
+	$cbr40 set rate_ 25000
+	$cbr40 set interval_ 5 
+	$cbr40 set random_ 0
+	$ns_ at 17 "$cbr40 start "
+	$ns_ at 290 "$cbr40 stop "
+
+
+
+	
+	
+
+
+
+	set udp41 [new Agent/UDP]
+	set sink41 [new Agent/Null]
+	$ns_ attach-agent $node_(15) $udp41
+	$ns_ attach-agent $node_(8) $sink41
+	$ns_ connect $udp41 $sink41
+	set cbr41 [new Application/Traffic/CBR]
+	$cbr41 attach-agent $udp41
+	$cbr41 set packetSize_ 100
+	$cbr41 set rate_ 25000
+	$cbr41 set interval_ 5 
+	$cbr41 set random_ 0
+	$ns_ at 15 "$cbr41 start "
+	$ns_ at 290 "$cbr41 stop "
+
+
+	set udp42 [new Agent/UDP]
+	set sink42 [new Agent/Null]
+	$ns_ attach-agent $node_(8) $udp42
+	$ns_ attach-agent $node_(7) $sink42
+	$ns_ connect $udp42 $sink42
+	set cbr42 [new Application/Traffic/CBR]
+	$cbr42 attach-agent $udp42
+	$cbr42 set packetSize_ 100
+	$cbr42 set rate_ 25000
+	$cbr42 set interval_ 5 
+	$cbr42 set random_ 0
+	$ns_ at 16 "$cbr42 start "
+	$ns_ at 290 "$cbr42 stop "
+
+
+
+	set udp43 [new Agent/UDP]
+	set sink43 [new Agent/Null]
+	$ns_ attach-agent $node_(7) $udp43
+	$ns_ attach-agent $node_(5) $sink43
+	$ns_ connect $udp43 $sink43
+	set cbr43 [new Application/Traffic/CBR]
+	$cbr43 attach-agent $udp43
+	$cbr43 set packetSize_ 100
+	$cbr43 set rate_ 25000
+	$cbr43 set interval_ 5 
+	$cbr43 set random_ 0
+	$ns_ at 17 "$cbr43 start "
+	$ns_ at 290 "$cbr43 stop "
+
+
+	
+	set udp44 [new Agent/UDP]
+	set sink44 [new Agent/Null]
+	$ns_ attach-agent $node_(5) $udp44
+	$ns_ attach-agent $node_(0) $sink44
+	$ns_ connect $udp44 $sink44
+	set cbr44 [new Application/Traffic/CBR]
+	$cbr44 attach-agent $udp44
+	$cbr44 set packetSize_ 100
+	$cbr44 set rate_ 25000
+	$cbr44 set interval_ 5 
+	$cbr44 set random_ 0
+	$ns_ at 18 "$cbr44 start "
+	$ns_ at 290 "$cbr44 stop "
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	Mac/802_15_4 wpanNam FlowClr -p AODV -c tomato
 	Mac/802_15_4 wpanNam FlowClr -p ARP -c green
@@ -614,38 +898,36 @@ if { ("$val(traffic)" == "cbr") } {
 	}
 
 
-	$ns_ at $appTime1 "$ns_ trace-annotate \"(at $appTime1) $val(traffic) traffic from node 7 to node 5\" "
-	Mac/802_15_4 wpanNam FlowClr -p $pktType -s 7 -d 5 -c blue
-	$ns_ at $appTime3 "$ns_ trace-annotate \"(at $appTime3) $val(traffic) traffic from node 5 to node 0\" "
-	Mac/802_15_4 wpanNam FlowClr -p $pktType -s 5 -d 0 -c green4
-	$ns_ at $appTime5 "$ns_ trace-annotate \"(at $appTime5) $val(traffic) traffic from node 0 to node 5\" "
-	Mac/802_15_4 wpanNam FlowClr -p $pktType -s 0 -d 5 -c cyan4
-	$ns_ at $appTime7 "$ns_ trace-annotate \"(at $appTime7) $val(traffic) traffic from node 5 to node 7\" "
-	Mac/802_15_4 wpanNam FlowClr -p $pktType -s 5 -d 7 -c red
-	$ns_ at $appTime9 "$ns_ trace-annotate \"(at $appTime9) $val(traffic) traffic from node 8 to node 7\" "
-	$ns_ at $appTime11 "$ns_ trace-annotate \"(at $appTime11) $val(traffic) traffic from node 7 to node 5\" "
-	
-	
-	$ns_ at $appTime17 "$ns_ trace-annotate \"(at $appTime17) $val(traffic) traffic from node 5 to node 7\" "
-	$ns_ at $appTime19 "$ns_ trace-annotate \"(at $appTime19) $val(traffic) traffic from node 7 to node 8\" "
-	$ns_ at $appTime21 "$ns_ trace-annotate \"(at $appTime21) $val(traffic) traffic from node 8 to node 7\" "
-	$ns_ at $appTime23 "$ns_ trace-annotate \"(at $appTime23) $val(traffic) traffic from node 7 to node 8\" "
-	$ns_ at $appTime25 "$ns_ trace-annotate \"(at $appTime25) $val(traffic) traffic from node 6 to node 5\" "
+	$ns_ at $appTime1 "$ns_ trace-annotate \"(at $appTime1) $val(traffic) traffic from node 1 to node 0\" "
+	Mac/802_15_4 wpanNam FlowClr -p $pktType -s 1 -d 0 -c blue
+	$ns_ at $appTime3 "$ns_ trace-annotate \"(at $appTime3) $val(traffic) traffic from node 0 to node 1\" "
+	Mac/802_15_4 wpanNam FlowClr -p $pktType -s 0 -d 1 -c green4
+	$ns_ at $appTime5 "$ns_ trace-annotate \"(at $appTime5) $val(traffic) traffic from node 2 to node 0\" "
+	Mac/802_15_4 wpanNam FlowClr -p $pktType -s 2 -d 0 -c cyan4
+	$ns_ at $appTime7 "$ns_ trace-annotate \"(at $appTime7) $val(traffic) traffic from node 0 to node 2\" "
+	Mac/802_15_4 wpanNam FlowClr -p $pktType -s 0 -d 2 -c red
+	$ns_ at $appTime9 "$ns_ trace-annotate \"(at $appTime9) $val(traffic) traffic from node 3 to node 0\" "
+	$ns_ at $appTime11 "$ns_ trace-annotate \"(at $appTime11) $val(traffic) traffic from node 0 to node 3\" "
+	$ns_ at $appTime13 "$ns_ trace-annotate \"(at $appTime13) $val(traffic) traffic from node 4 to node 0\" "
+	$ns_ at $appTime15 "$ns_ trace-annotate \"(at $appTime15) $val(traffic) traffic from node 0 to node 4\" "
+	$ns_ at $appTime17 "$ns_ trace-annotate \"(at $appTime17) $val(traffic) traffic from node 4 to node 9\" "
+	$ns_ at $appTime19 "$ns_ trace-annotate \"(at $appTime19) $val(traffic) traffic from node 9 to node 4\" "
+	$ns_ at $appTime21 "$ns_ trace-annotate \"(at $appTime21) $val(traffic) traffic from node 5 to node 0\" "
+	$ns_ at $appTime23 "$ns_ trace-annotate \"(at $appTime23) $val(traffic) traffic from node 0 to node 5\" "
+	$ns_ at $appTime25 "$ns_ trace-annotate \"(at $appTime25) $val(traffic) traffic from node 5 to node 6\" "
 	$ns_ at $appTime27 "$ns_ trace-annotate \"(at $appTime27) $val(traffic) traffic from node 6 to node 5\" "
-	$ns_ at $appTime29 "$ns_ trace-annotate \"(at $appTime29) $val(traffic) traffic from node 5 to node 6\" "
-	$ns_ at $appTime31 "$ns_ trace-annotate \"(at $appTime31) $val(traffic) traffic from node 5 to node 6\" "
-	$ns_ at $appTime33 "$ns_ trace-annotate \"(at $appTime33) $val(traffic) traffic from node 9 to node 4\" "
-	$ns_ at $appTime35 "$ns_ trace-annotate \"(at $appTime35) $val(traffic) traffic from node 4 to node 0\" "
-	$ns_ at $appTime37 "$ns_ trace-annotate \"(at $appTime37) $val(traffic) traffic from node 0 to node 4\" "
-	$ns_ at $appTime39 "$ns_ trace-annotate \"(at $appTime39) $val(traffic) traffic from node 4 to node 9\" "
-	$ns_ at $appTime41 "$ns_ trace-annotate \"(at $appTime41) $val(traffic) traffic from node 9 to node 4\" "
-	$ns_ at $appTime43 "$ns_ trace-annotate \"(at $appTime43) $val(traffic) traffic from node 4 to node 9\" "
-	$ns_ at $appTime45 "$ns_ trace-annotate \"(at $appTime45) $val(traffic) traffic from node 3 to node 0\" "
-	$ns_ at $appTime47 "$ns_ trace-annotate \"(at $appTime47) $val(traffic) traffic from node 0 to node 3\" "
-	$ns_ at $appTime49 "$ns_ trace-annotate \"(at $appTime49) $val(traffic) traffic from node 2 to node 0\" "
-	$ns_ at $appTime51 "$ns_ trace-annotate \"(at $appTime51) $val(traffic) traffic from node 0 to node 2\" "
-	$ns_ at $appTime53 "$ns_ trace-annotate \"(at $appTime53) $val(traffic) traffic from node 1 to node 0\" "
-	$ns_ at $appTime55 "$ns_ trace-annotate \"(at $appTime55) $val(traffic) traffic from node 0 to node 1\" "
+	$ns_ at $appTime29 "$ns_ trace-annotate \"(at $appTime29) $val(traffic) traffic from node 5 to node 7\" "
+	$ns_ at $appTime31 "$ns_ trace-annotate \"(at $appTime31) $val(traffic) traffic from node 7 to node 5\" "
+	$ns_ at $appTime33 "$ns_ trace-annotate \"(at $appTime33) $val(traffic) traffic from node 6 to node 5\" "
+	$ns_ at $appTime35 "$ns_ trace-annotate \"(at $appTime35) $val(traffic) traffic from node 5 to node 6\" "
+	$ns_ at $appTime37 "$ns_ trace-annotate \"(at $appTime37) $val(traffic) traffic from node 7 to node 5\" "
+	$ns_ at $appTime39 "$ns_ trace-annotate \"(at $appTime39) $val(traffic) traffic from node 5 to node 7\" "
+	$ns_ at $appTime41 "$ns_ trace-annotate \"(at $appTime41) $val(traffic) traffic from node 7 to node 8\" "
+	$ns_ at $appTime43 "$ns_ trace-annotate \"(at $appTime43) $val(traffic) traffic from node 8 to node 7\" "
+	$ns_ at $appTime45 "$ns_ trace-annotate \"(at $appTime45) $val(traffic) traffic from node 8 to node 7\" "
+	$ns_ at $appTime47 "$ns_ trace-annotate \"(at $appTime47) $val(traffic) traffic from node 7 to node 8\" "
+	$ns_ at $appTime49 "$ns_ trace-annotate \"(at $appTime49) $val(traffic) traffic from node 9 to node 4\" "
+	$ns_ at $appTime51 "$ns_ trace-annotate \"(at $appTime51) $val(traffic) traffic from node 4 to node 9\" "
 }
 
 
