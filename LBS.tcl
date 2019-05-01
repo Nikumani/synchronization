@@ -143,27 +143,29 @@ for {set i 0} {$i < $val(nn) } {incr i} {
 source ./SDS.scn
 
 $ns_ at 0.0	"$node_(0) NodeLabel PAN Coor"
-$ns_ at 0.0	"$node_(0) sscs startPANCoord 1 8 2 "		;
-$ns_ at 0.062 	"$node_(1) sscs startDevice  1 8 2 "		;
-$ns_ at 0.124 	"$node_(2) sscs startDevice  1 8 2 "		;
-$ns_ at 0.186 	"$node_(3) sscs startDevice  1 8 2 "		;
-$ns_ at 0.248 	"$node_(4) sscs startDevice  1 8 2 "		;
-$ns_ at 0.310 	"$node_(5) sscs startDevice  1 8 2 "		;
-$ns_ at 0.372 	"$node_(6) sscs startDevice  1 8 2 "		;
-$ns_ at 0.434 	"$node_(7) sscs startDevice  1 8 2 "		;
-$ns_ at 0.496 	"$node_(8) sscs startDevice  1 8 2 "		;
-$ns_ at 5.6 	"$node_(9) sscs startDevice  1 8 2 "		;
-$ns_ at 0.6 	"$node_(10) sscs startDevice  0 "		;
-$ns_ at 0.6 	"$node_(11) sscs startDevice  0 "		;
-$ns_ at 0.6 	"$node_(12) sscs startDevice  0 "		;
-$ns_ at 0.6 	"$node_(13) sscs startDevice  0 "		;
-$ns_ at 0.6 	"$node_(14) sscs startDevice  0 "		;
-$ns_ at 0.6 	"$node_(15) sscs startDevice  0 "		;
+$ns_ at 0.0	"$node_(0) sscs startCTPANCoord 1 8 2 "		;
+$ns_ at 0.062 	"$node_(1) sscs startCTDevice  1 8 2 "		;
+$ns_ at 0.124 	"$node_(2) sscs startCTDevice  1 8 2 "		;
+$ns_ at 0.186 	"$node_(3) sscs startCTDevice  1 8 2 "		;
+$ns_ at 0.248 	"$node_(4) sscs startCTDevice  1 8 2 "		;
+$ns_ at 0.310 	"$node_(5) sscs startCTDevice  1 8 2 "		;
+$ns_ at 0.372 	"$node_(6) sscs startCTDevice  1 8 2 "		;
+$ns_ at 0.434 	"$node_(7) sscs startCTDevice  1 8 2 "		;
+$ns_ at 0.496 	"$node_(8) sscs startCTDevice  1 8 2 "		;
+$ns_ at 0.6 	"$node_(9) sscs startCTDevice  1 8 2 "		;
+$ns_ at 0.6 	"$node_(10) sscs startCTDevice  0 "		;
+$ns_ at 0.6 	"$node_(11) sscs startCTDevice  0 "		;
+$ns_ at 0.6 	"$node_(12) sscs startCTDevice  0 "		;
+$ns_ at 0.6 	"$node_(13) sscs startCTDevice  0 "		;
+$ns_ at 0.6 	"$node_(14) sscs startCTDevice  0 "		;
+$ns_ at 0.6 	"$node_(15) sscs startCTDevice  0 "		;
+
 
 
 
 
 # Setup traffic flow between nodes
+#synchronization
 if { ("$val(traffic)" == "cbr") } {
 	puts "Traffic: $val(traffic)"
 	puts [format "Acknowledgement for data: " [Mac/802_15_4 wpanCmd ack4data]]
@@ -491,6 +493,277 @@ if { ("$val(traffic)" == "cbr") } {
 	$cbr28 set random_ 0
 	$ns_ at 1 "$cbr28 start "
 	$ns_ at 9 "$cbr28 stop "
+
+   #regular traffic
+        set udp29 [new Agent/UDP]
+	set sink29 [new Agent/Null]
+	$ns_ attach-agent $node_(12) $udp29
+	$ns_ attach-agent $node_(1) $sink29
+	$ns_ connect $udp29 $sink29
+	set cbr29 [new Application/Traffic/CBR]
+	$cbr29 attach-agent $udp29
+	$cbr29 set packetSize_ 100
+	$cbr29 set rate_ 25000
+	$cbr29 set interval_ 10 
+	$cbr29 set random_ 0
+	$ns_ at 15 "$cbr29 start "
+	$ns_ at 290 "$cbr29 stop "
+
+
+
+	set udp30 [new Agent/UDP]
+	set sink30 [new Agent/Null]
+	$ns_ attach-agent $node_(1) $udp30
+	$ns_ attach-agent $node_(0) $sink30
+	$ns_ connect $udp30 $sink30
+	set cbr30 [new Application/Traffic/CBR]
+	$cbr30 attach-agent $udp30
+	$cbr30 set packetSize_ 100
+	$cbr30 set rate_ 25000
+	$cbr30 set interval_ 10 
+	$cbr30 set random_ 0
+	$ns_ at 16 "$cbr30 start "
+	$ns_ at 290 "$cbr30 stop "
+
+
+	
+	set udp31 [new Agent/UDP]
+	set sink31 [new Agent/Null]
+	$ns_ attach-agent $node_(11) $udp31
+	$ns_ attach-agent $node_(1) $sink31
+	$ns_ connect $udp31 $sink31
+	set cbr31 [new Application/Traffic/CBR]
+	$cbr31 attach-agent $udp31
+	$cbr31 set packetSize_ 100
+	$cbr31 set rate_ 25000
+	$cbr31 set interval_ 10 
+	$cbr31 set random_ 0
+	$ns_ at 15 "$cbr31 start "
+	$ns_ at 290 "$cbr31 stop "
+
+
+
+	set udp32 [new Agent/UDP]
+	set sink32 [new Agent/Null]
+	$ns_ attach-agent $node_(1) $udp32
+	$ns_ attach-agent $node_(0) $sink32
+	$ns_ connect $udp32 $sink32
+	set cbr32 [new Application/Traffic/CBR]
+	$cbr32 attach-agent $udp32
+	$cbr32 set packetSize_ 100
+	$cbr32 set rate_ 25000
+	$cbr32 set interval_ 10 
+	$cbr32 set random_ 0
+	$ns_ at 16 "$cbr32 start "
+	$ns_ at 290 "$cbr32 stop "
+
+
+	set udp33 [new Agent/UDP]
+	set sink33 [new Agent/Null]
+	$ns_ attach-agent $node_(10) $udp33
+	$ns_ attach-agent $node_(2) $sink33
+	$ns_ connect $udp33 $sink33
+	set cbr33 [new Application/Traffic/CBR]
+	$cbr33 attach-agent $udp33
+	$cbr33 set packetSize_ 100
+	$cbr33 set rate_ 25000
+	$cbr33 set interval_ 10 
+	$cbr33 set random_ 0
+	$ns_ at 15 "$cbr33 start "
+	$ns_ at 290 "$cbr33 stop "
+
+
+
+	set udp34 [new Agent/UDP]
+	set sink34 [new Agent/Null]
+	$ns_ attach-agent $node_(2) $udp34
+	$ns_ attach-agent $node_(0) $sink34
+	$ns_ connect $udp34 $sink34
+	set cbr34 [new Application/Traffic/CBR]
+	$cbr34 attach-agent $udp34
+	$cbr34 set packetSize_ 100
+	$cbr34 set rate_ 25000
+	$cbr34 set interval_ 10 
+	$cbr34 set random_ 0
+	$ns_ at 16 "$cbr34 start "
+	$ns_ at 290 "$cbr34 stop "
+
+
+
+
+
+	set udp35 [new Agent/UDP]
+	set sink35 [new Agent/Null]
+	$ns_ attach-agent $node_(13) $udp35
+	$ns_ attach-agent $node_(7) $sink35
+	$ns_ connect $udp35 $sink35
+	set cbr35 [new Application/Traffic/CBR]
+	$cbr35 attach-agent $udp35
+	$cbr35 set packetSize_ 100
+	$cbr35 set rate_ 25000
+	$cbr35 set interval_ 10 
+	$cbr35 set random_ 0
+	$ns_ at 15 "$cbr35 start "
+	$ns_ at 290 "$cbr35 stop "
+
+
+
+	set udp36 [new Agent/UDP]
+	set sink36 [new Agent/Null]
+	$ns_ attach-agent $node_(7) $udp36
+	$ns_ attach-agent $node_(5) $sink36
+	$ns_ connect $udp36 $sink36
+	set cbr36 [new Application/Traffic/CBR]
+	$cbr36 attach-agent $udp36
+	$cbr36 set packetSize_ 100
+	$cbr36 set rate_ 25000
+	$cbr36 set interval_ 10 
+	$cbr36 set random_ 0
+	$ns_ at 16 "$cbr36 start "
+	$ns_ at 290 "$cbr36 stop "
+
+
+	
+	set udp37 [new Agent/UDP]
+	set sink37 [new Agent/Null]
+	$ns_ attach-agent $node_(5) $udp37
+	$ns_ attach-agent $node_(0) $sink37
+	$ns_ connect $udp37 $sink37
+	set cbr37 [new Application/Traffic/CBR]
+	$cbr37 attach-agent $udp37
+	$cbr37 set packetSize_ 100
+	$cbr37 set rate_ 25000
+	$cbr37 set interval_ 10 
+	$cbr37 set random_ 0
+	$ns_ at 17 "$cbr37 start "
+	$ns_ at 290 "$cbr37 stop "
+
+	
+
+
+
+
+
+
+
+
+
+
+	set udp38 [new Agent/UDP]
+	set sink38 [new Agent/Null]
+	$ns_ attach-agent $node_(14) $udp38
+	$ns_ attach-agent $node_(7) $sink38
+	$ns_ connect $udp38 $sink38
+	set cbr38 [new Application/Traffic/CBR]
+	$cbr38 attach-agent $udp38
+	$cbr38 set packetSize_ 100
+	$cbr38 set rate_ 25000
+	$cbr38 set interval_ 5 
+	$cbr38 set random_ 0
+	$ns_ at 15 "$cbr38 start "
+	$ns_ at 290 "$cbr38 stop "
+
+
+
+	set udp39 [new Agent/UDP]
+	set sink39 [new Agent/Null]
+	$ns_ attach-agent $node_(7) $udp39
+	$ns_ attach-agent $node_(5) $sink39
+	$ns_ connect $udp39 $sink39
+	set cbr39 [new Application/Traffic/CBR]
+	$cbr39 attach-agent $udp39
+	$cbr39 set packetSize_ 100
+	$cbr39 set rate_ 25000
+	$cbr39 set interval_ 5 
+	$cbr39 set random_ 0
+	$ns_ at 16 "$cbr39 start "
+	$ns_ at 290 "$cbr39 stop "
+
+
+	
+	set udp40 [new Agent/UDP]
+	set sink40 [new Agent/Null]
+	$ns_ attach-agent $node_(5) $udp40
+	$ns_ attach-agent $node_(0) $sink40
+	$ns_ connect $udp40 $sink40
+	set cbr40 [new Application/Traffic/CBR]
+	$cbr40 attach-agent $udp40
+	$cbr40 set packetSize_ 100
+	$cbr40 set rate_ 25000
+	$cbr40 set interval_ 5 
+	$cbr40 set random_ 0
+	$ns_ at 17 "$cbr40 start "
+	$ns_ at 290 "$cbr40 stop "
+
+
+
+	
+	
+
+
+
+	set udp41 [new Agent/UDP]
+	set sink41 [new Agent/Null]
+	$ns_ attach-agent $node_(15) $udp41
+	$ns_ attach-agent $node_(8) $sink41
+	$ns_ connect $udp41 $sink41
+	set cbr41 [new Application/Traffic/CBR]
+	$cbr41 attach-agent $udp41
+	$cbr41 set packetSize_ 100
+	$cbr41 set rate_ 25000
+	$cbr41 set interval_ 5 
+	$cbr41 set random_ 0
+	$ns_ at 15 "$cbr41 start "
+	$ns_ at 290 "$cbr41 stop "
+
+
+	set udp42 [new Agent/UDP]
+	set sink42 [new Agent/Null]
+	$ns_ attach-agent $node_(8) $udp42
+	$ns_ attach-agent $node_(7) $sink42
+	$ns_ connect $udp42 $sink42
+	set cbr42 [new Application/Traffic/CBR]
+	$cbr42 attach-agent $udp42
+	$cbr42 set packetSize_ 100
+	$cbr42 set rate_ 25000
+	$cbr42 set interval_ 5 
+	$cbr42 set random_ 0
+	$ns_ at 16 "$cbr42 start "
+	$ns_ at 290 "$cbr42 stop "
+
+
+
+	set udp43 [new Agent/UDP]
+	set sink43 [new Agent/Null]
+	$ns_ attach-agent $node_(7) $udp43
+	$ns_ attach-agent $node_(5) $sink43
+	$ns_ connect $udp43 $sink43
+	set cbr43 [new Application/Traffic/CBR]
+	$cbr43 attach-agent $udp43
+	$cbr43 set packetSize_ 100
+	$cbr43 set rate_ 25000
+	$cbr43 set interval_ 5 
+	$cbr43 set random_ 0
+	$ns_ at 17 "$cbr43 start "
+	$ns_ at 290 "$cbr43 stop "
+
+
+	
+	set udp44 [new Agent/UDP]
+	set sink44 [new Agent/Null]
+	$ns_ attach-agent $node_(5) $udp44
+	$ns_ attach-agent $node_(0) $sink44
+	$ns_ connect $udp44 $sink44
+	set cbr44 [new Application/Traffic/CBR]
+	$cbr44 attach-agent $udp44
+	$cbr44 set packetSize_ 100
+	$cbr44 set rate_ 25000
+	$cbr44 set interval_ 5 
+	$cbr44 set random_ 0
+	$ns_ at 18 "$cbr44 start "
+	$ns_ at 290 "$cbr44 stop "
+
+
 
 
 	Mac/802_15_4 wpanNam FlowClr -p AODV -c tomato
