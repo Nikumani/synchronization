@@ -7,9 +7,10 @@
 class TableCorresp
 {
 	
-	static unsigned short CorrespEntry[MAX_ENTRY] ; //table de correspondance Cluster tree address
-	static unsigned short CorrespParent[MAX_ENTRY] ; // L'adresse CT du parent du noeud
-	static unsigned short CorrespDepth[MAX_ENTRY]; //La profondeur du noeud 
+	static unsigned short CorrespEntry[MAX_ENTRY] ; 
+	static unsigned short CorrespParent[MAX_ENTRY] ; 
+	static unsigned short CorrespDepth[MAX_ENTRY]; 
+	static unsigned short CorrespAO[16] 
 	static bool isFFD[MAX_ENTRY];
 	static short params[3];
 	
@@ -18,7 +19,7 @@ class TableCorresp
 	//end modification
 	
 	public:
-	//----------------------Renvoie et Ajout de l'adresse Cluster Tree du noeud-------------------------------
+	
 	static unsigned short returnCTAddr(unsigned short entry)
 	{
 		return CorrespEntry[entry]; 
@@ -28,7 +29,7 @@ class TableCorresp
 	{
 		CorrespEntry[nodeId]= CTAddr;
 	}
-	//----------------------Renvoie et Ajout de l'adresse des parents-------------------------------
+	
 	static unsigned short returnCTParent(unsigned short entry)
 	{
 		return CorrespParent[entry]; 
@@ -38,7 +39,7 @@ class TableCorresp
 	{
 		CorrespParent[nodeId]=CTParentAddr;
 	}
-	//----------------------Renvoie et Ajout du depth du noeud-------------------------------
+	
 	static unsigned short returnCTDepth(unsigned short entry)
 	{
 		return CorrespDepth[entry]; 
@@ -48,7 +49,7 @@ class TableCorresp
 	{
 		CorrespDepth[nodeId]=CTDepth;
 	}
-	//----------------- Renvoie et ajout  de Lm Rm et Cm-------------------
+	
 	static short Lm()
 	{
 		return params[0];
@@ -69,7 +70,7 @@ class TableCorresp
 		params[1] = Cm;
 		params[2] = Rm;
 	}
-	//-------------------Renvoie et ajout si le noeud est FFD-------------
+	
 	static bool returnIsFFD(unsigned short entry)
 	{
 		return isFFD[entry];
@@ -78,18 +79,20 @@ class TableCorresp
 	{
 		isFFD[nodeId]=ffd;
 	}
-		//---------------Renvoie et ajoute la liste des voisins---------------
+		
 	static unsigned short *returnNeighborList(unsigned short entry)
 	{
 		return Neighbors[entry]; 
 	}
 	
-	static void addNeighbor(unsigned short nodeId, unsigned short num, unsigned short neighbor)
+	static void addNeighbor(unsigned short nodeId, unsigned short num, unsigned short neighbor, unsigned short AO)
 	{
 		Neighbors[nodeId][num]=neighbor;
-	
+
+		CorrespAO[nodeId]=AO; 
 	}
 	void updateNeighborList(unsigned short nodeId, unsigned short neighbor);
+	
 	
 };
 

@@ -7,6 +7,7 @@ using namespace std;
 unsigned short TableCorresp::CorrespEntry[];
 unsigned short TableCorresp::CorrespParent[];
 unsigned short TableCorresp::CorrespDepth[];
+unsigned short TableCorresp::CorrespAO[];
 unsigned short TableCorresp::Neighbors[][MAX_NEIGHBORS];
 short TableCorresp::params[];
 bool TableCorresp::isFFD[];
@@ -34,3 +35,4 @@ void TableCorresp::updateNeighborList(unsigned short nodeId, unsigned short neig
 		fprintf(stdout, "node %d add node %d as neighbor \n",nodeId, neighbor);
 	}
 }
+
