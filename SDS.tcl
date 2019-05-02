@@ -159,22 +159,22 @@ for {set i 0} {$i < $val(nn) } {incr i} {
 source ./SDS.scn
 
 $ns_ at 0.0	"$node_(0) NodeLabel PAN Coor"
-$ns_ at 0.0	"$node_(0) sscs startPANCoord 1 8 2 "		;
-$ns_ at 0.062 	"$node_(1) sscs startDevice  1 8 2 "		;
-$ns_ at 0.124 	"$node_(2) sscs startDevice  1 8 2 "		;
-$ns_ at 0.186 	"$node_(3) sscs startDevice  1 8 2 "		;
-$ns_ at 0.248 	"$node_(4) sscs startDevice  1 8 2 "		;
-$ns_ at 0.310 	"$node_(5) sscs startDevice  1 8 2 "		;
-$ns_ at 0.372 	"$node_(6) sscs startDevice  1 8 2 "		;
-$ns_ at 0.434 	"$node_(7) sscs startDevice  1 8 2 "		;
-$ns_ at 0.496 	"$node_(8) sscs startDevice  1 8 2 "		;
-$ns_ at 0.6 	"$node_(9) sscs startDevice  1 8 2 "		;
-$ns_ at 0.6 	"$node_(10) sscs startDevice  0 "		;
-$ns_ at 0.6 	"$node_(11) sscs startDevice  0 "		;
-$ns_ at 0.6 	"$node_(12) sscs startDevice  0 "		;
-$ns_ at 0.6 	"$node_(13) sscs startDevice  0 "		;
-$ns_ at 0.6 	"$node_(14) sscs startDevice  0 "		;
-$ns_ at 0.6 	"$node_(15) sscs startDevice  0 "		;
+$ns_ at 0.0	"$node_(0) sscs startCTPANCoord 1 8 2 "		;
+$ns_ at 0.062 	"$node_(1) sscs startCTDevice  1 8 2 "		;
+$ns_ at 0.124 	"$node_(2) sscs startCTDevice  1 8 2 "		;
+$ns_ at 0.186 	"$node_(3) sscs startCTDevice  1 8 2 "		;
+$ns_ at 0.248 	"$node_(4) sscs startCTDevice  1 8 2 "		;
+$ns_ at 0.310 	"$node_(5) sscs startCTDevice  1 8 2 "		;
+$ns_ at 0.372 	"$node_(6) sscs startCTDevice  1 8 2 "		;
+$ns_ at 0.434 	"$node_(7) sscs startCTDevice  1 8 2 "		;
+$ns_ at 0.496 	"$node_(8) sscs startCTDevice  1 8 2 "		;
+$ns_ at 0.6 	"$node_(9) sscs startCTDevice  1 8 2 "		;
+$ns_ at 0.6 	"$node_(10) sscs startCTDevice  0 "		;
+$ns_ at 0.6 	"$node_(11) sscs startCTDevice  0 "		;
+$ns_ at 0.6 	"$node_(12) sscs startCTDevice  0 "		;
+$ns_ at 0.6 	"$node_(13) sscs startCTDevice  0 "		;
+$ns_ at 0.6 	"$node_(14) sscs startCTDevice  0 "		;
+$ns_ at 0.6 	"$node_(15) sscs startCTDevice  0 "		;
 
 
 
